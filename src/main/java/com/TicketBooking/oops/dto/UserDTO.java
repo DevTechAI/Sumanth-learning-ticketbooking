@@ -14,7 +14,6 @@ import lombok.NoArgsConstructor;
 @Data
 public class UserDTO
 {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int uid;
