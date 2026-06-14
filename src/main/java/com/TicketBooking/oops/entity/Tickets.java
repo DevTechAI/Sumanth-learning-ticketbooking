@@ -1,10 +1,7 @@
 package com.TicketBooking.oops.entity;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
@@ -14,6 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
+@Table(schema = "tickets")
 public class Tickets
 {
 
@@ -22,9 +20,17 @@ public class Tickets
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="id")
     private int tid;
 
     //private String name;
+    @Column(name="ticket_number")
     private String ticketNumber;
+
+    @Column(name="mid")
+    private int mid;
+
+    @Column(name="uid")
+    private int uid;
 
 }

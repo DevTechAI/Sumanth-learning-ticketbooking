@@ -12,22 +12,25 @@ import lombok.NonNull;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-//@Table("User")
+@Table(schema = "user_details")
 public class UserDetails
 {
-
-    //userid will be connected to movieid(movie)
-    //moveid connected to ticketid(tickets)
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "uid")
     private int uid;
 
+    @Column(name = "user_name")
     private String userName;
 
     @Nonnull
+    @Column(name = "pass_word")
     private String PassWord;
+
+    @Column(name = "ticket_number")
     private String ticketNumber;
-    private String movieName;
+
+    @Column(name = "email")
     private String email;
+
 }
