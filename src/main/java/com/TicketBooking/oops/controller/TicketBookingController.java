@@ -1,6 +1,7 @@
 package com.TicketBooking.oops.controller;
 
 import com.TicketBooking.oops.dto.BookTicketRequest;
+import com.TicketBooking.oops.dto.BookingResponse;
 import com.TicketBooking.oops.dto.TicketResponse;
 import com.TicketBooking.oops.entity.Tickets;
 import com.TicketBooking.oops.service.BookingService;
@@ -21,14 +22,14 @@ public class TicketBookingController
         this.ticketService = ticketService;
     }
 
-    @GetMapping("/hello")
-    public String HelloControl()
-    {
-        return "Hello WOrld";
-    }
+//    @GetMapping("/hello")
+//    public String HelloControl()
+//    {
+//        return "Hello WOrld";
+//    }
 
     @PostMapping("/book")
-    public Mono<Tickets> bookTicket(@RequestBody BookTicketRequest request)
+    public Mono<BookingResponse> bookTicket(@RequestBody BookTicketRequest request)
     {
         return bookingService.bookTicket(request);
     }

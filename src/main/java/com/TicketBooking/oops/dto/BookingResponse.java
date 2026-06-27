@@ -10,6 +10,10 @@ public class BookingResponse
     private int ticketId;
     private String booking_Reference;
     private String status_res;
-   // private String message_res;
-
+    private int paymentId;
+    private String paymentStatus;
+    private String razorpayKeyId;
+    private String razorpayOrderId;
+    private int amount;
+    private String currency;
 }

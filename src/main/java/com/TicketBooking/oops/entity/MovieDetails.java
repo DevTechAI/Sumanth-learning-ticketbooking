@@ -1,34 +1,47 @@
 package com.TicketBooking.oops.entity;
 
 
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.Column;
+import org.springframework.data.relational.core.mapping.Table;
 
-@Entity
+import java.time.LocalDate;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@Table(schema="movie_details")
+@Table("movie_details")
 public class MovieDetails
 {
-
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="mid")
+    @Column("mid")
     private int mid; //movieid
 
-    @Column(name="movie_name")
+    @Column("movie_name") //title
     private String movieName;
 
-    @Column(name="movie_time")
+    @Column("movie_time")
     private String movieTime;
 
-    @Column(name="ticket_price")
+    @Column("ticket_price")
     private int ticketPrice;
 
-    @Column(name="total_tickets")
+    @Column("total_tickets")
     private int totalTickets;  //volatile variable
 
+    // new entities
+    @Column("releaseDate")
+    private LocalDate releaseDate;
+
+    @Column("duration")
+    private String duration;
+
+    @Column("description")
+    private String description;
+
+    @Column("availableTickets")
+    private int availableTickets;
 }

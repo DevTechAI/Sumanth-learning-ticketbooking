@@ -10,5 +10,9 @@ public class PaymentResponse
     private String payment_Status;
     private String transaction_Reference;
     private int amount_res;
+    private String razorpayKeyId;
+    private String razorpayOrderId;
+    private String razorpayPaymentId;
+    private String currency;
 
 }
