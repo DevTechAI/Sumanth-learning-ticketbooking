@@ -7,7 +7,7 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @RestController
-@RequestMapping("/user/")
+@RequestMapping("/user")
 public class UserController
 {
     private final UserService userService;
@@ -17,13 +17,13 @@ public class UserController
         this.userService = userService;
     }
 
-    @GetMapping("getallUsers/")
+    @GetMapping("/getallUsers")
     public Flux<UserDetails> getUserDetails()
     {
         return userService.getUserDetails();
     }
 
-    @GetMapping("byID/{uid}")
+    @GetMapping("/byID/{uid}")
     public Mono<UserDetails> getuserByID(@PathVariable int uid)
     {
         return userService.getuserByID(uid);

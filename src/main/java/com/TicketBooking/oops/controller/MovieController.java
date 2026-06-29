@@ -1,5 +1,6 @@
 package com.TicketBooking.oops.controller;
 
+import com.TicketBooking.oops.dto.MovieRequest;
 import com.TicketBooking.oops.entity.MovieDetails;
 import com.TicketBooking.oops.service.MovieService;
 import jakarta.annotation.Nonnull;
@@ -25,16 +26,16 @@ public class MovieController
         return movieService.getAllmovies();
     }
 
-    @GetMapping("/movies/{id}")
+    @GetMapping("/{id}")
     public Mono<MovieDetails> getMovieById(@PathVariable("id") @Nonnull int mid)
     {
         return movieService.getmovieById(mid);
     }
 
     @PostMapping("/addMovie")
-    public Mono<MovieDetails> addMovie(@RequestBody MovieDetails movieDetails)
+    public Mono<MovieDetails> addMovie(@RequestBody MovieRequest movieRequest)
     {
-        return movieService.createMovie(movieDetails);
+        return movieService.createMovie(movieRequest);
     }
 
     @PutMapping("/updateMovie")

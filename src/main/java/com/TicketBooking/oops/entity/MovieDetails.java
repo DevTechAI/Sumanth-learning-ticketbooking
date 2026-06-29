@@ -30,7 +30,7 @@ public class MovieDetails
     private int ticketPrice;
 
     @Column("total_tickets")
-    private int totalTickets;  //volatile variable
+    private volatile int totalTickets;  //volatile variable
 
     // new entities
     @Column("releaseDate")

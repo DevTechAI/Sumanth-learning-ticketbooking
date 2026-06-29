@@ -80,7 +80,8 @@ public class BookingService
                     tickets.setPrice(movieDetails.getTicketPrice());
                     tickets.setBookingReference(generateBookingReference());
                     tickets.setCreatedAt(LocalDateTime.now());
-                    tickets.setStatus(TicketStatus.PENDING.toString());
+                   // tickets.setStatus(TicketStatus.PENDING.toString());\
+                    tickets.setStatus(TicketStatus.BOOKED.toString());
 
                     movieDetails.setAvailableTickets(availableTickets - 1);
                     movieDetails.setTotalTickets(Math.max(movieDetails.getTotalTickets() - 1, 0));

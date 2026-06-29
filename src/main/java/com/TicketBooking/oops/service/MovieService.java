@@ -1,6 +1,8 @@
 package com.TicketBooking.oops.service;
 
+import com.TicketBooking.oops.dto.MovieRequest;
 import com.TicketBooking.oops.entity.MovieDetails;
+import com.TicketBooking.oops.mapper.MovieRequestMapper;
 import com.TicketBooking.oops.repository.MovieRepository;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
@@ -10,10 +12,12 @@ import reactor.core.publisher.Mono;
 public class MovieService
 {
     private final MovieRepository movieRepository;
+    private final MovieRequestMapper movieRequestMapper;
 
-    public MovieService (MovieRepository movieRepository)
+    public MovieService (MovieRepository movieRepository, MovieRequestMapper movieRequestMapper)
     {
         this.movieRepository = movieRepository;
+        this.movieRequestMapper = movieRequestMapper;
     }
 
     public Flux<MovieDetails> getAllmovies()
@@ -33,11 +37,12 @@ public class MovieService
 
     }
 
-    public Mono<MovieDetails> createMovie(MovieDetails movieDetails)
+    public Mono<MovieDetails> createMovie(MovieRequest movieRequest)
     {
-        if (movieDetails.getAvailableTickets() == 0) {
-            movieDetails.setAvailableTickets(movieDetails.getTotalTickets());
+        if (movieRequest.getAvailableTickets() == 0) {
+            movieRequest.setAvailableTickets(movieRequest.getTotalTickets());
         }
+        MovieDetails movieDetails = movieRequestMapper.toEntity(movieRequest);
         return movieRepository.save(movieDetails);
     }
 

@@ -41,5 +41,4 @@ public class Payment
     @Column("razorpay_payment_id")
     private String razorpayPaymentId;
 
-
 }

@@ -22,11 +22,6 @@ public class TicketBookingController
         this.ticketService = ticketService;
     }
 
-//    @GetMapping("/hello")
-//    public String HelloControl()
-//    {
-//        return "Hello WOrld";
-//    }
 
     @PostMapping("/book")
     public Mono<BookingResponse> bookTicket(@RequestBody BookTicketRequest request)
