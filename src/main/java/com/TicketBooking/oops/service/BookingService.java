@@ -56,7 +56,6 @@ public class BookingService
         return "BK-" + UUID.randomUUID().toString().substring(0, 8).toUpperCase();
     }
 
-
     public Mono<BookingResponse> bookTicket(BookTicketRequest bookTicketRequest)
     {
         Mono<UserDetails> user = validateUser(bookTicketRequest.getUid());
