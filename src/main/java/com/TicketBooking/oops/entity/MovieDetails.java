@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Version;
 import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
 
@@ -44,4 +45,8 @@ public class MovieDetails
 
     @Column("availableTickets")
     private int availableTickets;
+
+    @Version
+    @Column("version")
+    private Long version;
 }

@@ -12,8 +12,12 @@ import com.TicketBooking.oops.enums.TicketStatus;
 import com.TicketBooking.oops.repository.MovieRepository;
 import com.TicketBooking.oops.repository.TicketRepository;
 import com.TicketBooking.oops.repository.UserRepository;
+import org.springframework.dao.OptimisticLockingFailureException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import reactor.core.publisher.Mono;
+import reactor.core.scheduler.Schedulers;
+import reactor.util.retry.Retry;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -56,42 +60,48 @@ public class BookingService
         return "BK-" + UUID.randomUUID().toString().substring(0, 8).toUpperCase();
     }
 
+    private final Object bookingLock = new Object();
+
+    @Transactional
     public Mono<BookingResponse> bookTicket(BookTicketRequest bookTicketRequest)
     {
         Mono<UserDetails> user = validateUser(bookTicketRequest.getUid());
         Mono<MovieDetails> movie = validateMovie(bookTicketRequest.getMid());
 
-        return Mono.zip(user, movie)
-                .flatMap(tuple -> {
-                    MovieDetails movieDetails = tuple.getT2();
-                    int availableTickets = movieDetails.getAvailableTickets() > 0
-                            ? movieDetails.getAvailableTickets()
-                            : movieDetails.getTotalTickets();
+        return Mono.fromCallable(() -> {
+            synchronized (bookingLock) {
 
-                    if (availableTickets <= 0) {
-                        return Mono.error(new RuntimeException("Tickets are not available for this movie"));
-                    }
+                return validateUser(bookTicketRequest.getUid())
+                        .then(validateMovie(bookTicketRequest.getMid()))
+                        .flatMap(movieDetails -> {
 
-                    Tickets tickets = new Tickets();
-                    tickets.setUid(bookTicketRequest.getUid());
-                    tickets.setMid(bookTicketRequest.getMid());
-                    tickets.setTicketNumber(generateTicketNumber());
-                    tickets.setPrice(movieDetails.getTicketPrice());
-                    tickets.setBookingReference(generateBookingReference());
-                    tickets.setCreatedAt(LocalDateTime.now());
-                   // tickets.setStatus(TicketStatus.PENDING.toString());\
-                    tickets.setStatus(TicketStatus.BOOKED.toString());
+                            if (movieDetails.getAvailableTickets() <= 0) {
+                                return Mono.error(new RuntimeException("Tickets are not available"));
+                            }
 
-                    movieDetails.setAvailableTickets(availableTickets - 1);
-                    movieDetails.setTotalTickets(Math.max(movieDetails.getTotalTickets() - 1, 0));
+                            movieDetails.setAvailableTickets(movieDetails.getAvailableTickets() - 1);
 
-                    return movieRepository.save(movieDetails)
-                            .then(ticketRepository.save(tickets))
-                            .flatMap(savedTicket ->
-                                    paymentService.processPayment(toPaymentRequest
-                                                    (savedTicket, bookTicketRequest))
-                                    .map(paymentResponse -> buildBookingResponse(savedTicket, paymentResponse)));
-                });
+                            Tickets ticket = new Tickets();
+                            ticket.setUid(bookTicketRequest.getUid());
+                            ticket.setMid(bookTicketRequest.getMid());
+                            ticket.setTicketNumber(generateTicketNumber());
+                            ticket.setPrice(movieDetails.getTicketPrice());
+                            ticket.setBookingReference(generateBookingReference());
+                            ticket.setCreatedAt(LocalDateTime.now());
+                            ticket.setStatus(TicketStatus.BOOKED.toString());
+
+                            return movieRepository.save(movieDetails)
+                                    .then(ticketRepository.save(ticket))
+                                    .flatMap(savedTicket ->
+                                            paymentService.processPayment(toPaymentRequest(savedTicket, bookTicketRequest))
+                                                    .map(paymentResponse ->
+                                                            buildBookingResponse(savedTicket, paymentResponse)
+                                                    )
+                                    );
+                        })
+                        .block();
+            }
+        }).subscribeOn(Schedulers.boundedElastic());
     }
 
     public Mono<Tickets> cancelTicket(int tid)

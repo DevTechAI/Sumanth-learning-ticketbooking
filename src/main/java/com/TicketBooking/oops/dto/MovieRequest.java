@@ -26,4 +26,5 @@ public class MovieRequest
     private String description;
 
     private int availableTickets;
+    //private Long version;
 }
