@@ -1,0 +1,20 @@
+
+
+Repository always deal with entities
+Controller layer will always deal with DTO's
+primary keys of the entities should be matches with the DTO's it act as connector which will connect 2 classes.
+We cannot use DTO's for repo/DB commit because it doesn't have table annotations.
+We will not have all the columns in DTO only entity will.
+DTO is used to masking the entity class that directly connected to DB for security
+
+Mapper:
+a) Request(DTO to entity):- source is DTO and target is entity  -> connector is primary keys
+b) Response(ENtity to DTO):- source is entity and target is DTO
+
+
+SwtichifEMpty is a similar to try/catch block whcih return one object(true) or throws exception(false)
+
+step by step logic
+1) user login(already created)
+2) ticket booking using movie details+ user details
+3) Payment based on this ticket should be booked/cancelled

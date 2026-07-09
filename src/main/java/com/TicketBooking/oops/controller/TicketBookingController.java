@@ -45,6 +45,27 @@ public class TicketBookingController
                     );
     }
 
+    @PostMapping("/multiple-pessimistic")
+    public Flux<BookingResponse> bookMultiplePessimistic(@RequestBody List<BookTicketRequest> requests)
+    {
+        return Flux.fromIterable(requests)
+                .flatMap(request ->
+                                bookingService.bookTicketPessimistic(request)
+                                        .onErrorResume(ex -> {
+                                            BookingResponse response = new BookingResponse();
+                                            response.setStatus_res("FAILED");
+                                            response.setMessage(ex.getMessage());
+                                            return Mono.just(response);
+                                        }),
+                        10
+                );
+    }
+
+
+    @PostMapping("/book-pessimistic")
+    public Mono<BookingResponse> bookTicketPessimistic(@RequestBody BookTicketRequest request) {
+        return bookingService.bookTicketPessimistic(request);
+    }
 
     @GetMapping("/getticket/{bookingReference}")
     public Mono<TicketResponse> getTicket(@PathVariable String bookingReference)

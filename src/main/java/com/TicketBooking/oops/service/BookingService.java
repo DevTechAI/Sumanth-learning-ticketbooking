@@ -104,6 +104,45 @@ public class BookingService
         }).subscribeOn(Schedulers.boundedElastic());
     }
 
+
+    @Transactional
+    public Mono<BookingResponse> bookTicketPessimistic(BookTicketRequest request) {
+
+        return validateUser(request.getUid())
+                .then(movieRepository.decreaseAvailableTickets(request.getMid()))
+                .flatMap(updatedRows -> {
+
+                    if (updatedRows == 0) {
+                        return Mono.error(new RuntimeException("Tickets are not available"));
+                    }
+
+                    return movieRepository.findByMid(request.getMid());
+                })
+                .flatMap(movieDetails -> {
+
+                    Tickets ticket = new Tickets();
+                    ticket.setUid(request.getUid());
+                    ticket.setMid(request.getMid());
+                    ticket.setTicketNumber(generateTicketNumber());
+                    ticket.setPrice(movieDetails.getTicketPrice());
+                    ticket.setBookingReference(generateBookingReference());
+                    ticket.setCreatedAt(LocalDateTime.now());
+                    ticket.setStatus(TicketStatus.BOOKED.toString());
+
+                    return ticketRepository.save(ticket)
+                            .map(savedTicket -> {
+                                BookingResponse response = new BookingResponse();
+
+                                response.setTicketId(savedTicket.getTid());
+                                response.setBooking_Reference(savedTicket.getBookingReference());
+                                response.setStatus_res("BOOKED");
+                                response.setMessage("Ticket booked successfully without payment for testing");
+
+                                return response;
+                            });
+                });
+    }
+
     public Mono<Tickets> cancelTicket(int tid)
     {
         return ticketRepository.findById(tid)

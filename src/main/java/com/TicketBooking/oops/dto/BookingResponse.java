@@ -16,4 +16,5 @@ public class BookingResponse
     private String razorpayOrderId;
     private int amount;
     private String currency;
+    private String message;
 }
