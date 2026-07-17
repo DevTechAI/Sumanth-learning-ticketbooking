@@ -13,7 +13,7 @@ import org.springframework.data.relational.core.mapping.Table;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@Table(name = "payment")
+@Table(name = "payments")
 public class Payment
 {
     @Id
@@ -34,5 +34,11 @@ public class Payment
 
     @Column("transactionReference")
     private String transactionReference;
+
+    @Column("razorpay_order_id")
+    private String razorpayOrderId;
+
+    @Column("razorpay_payment_id")
+    private String razorpayPaymentId;
 
 }

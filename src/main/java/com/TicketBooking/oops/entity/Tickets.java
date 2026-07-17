@@ -1,36 +1,51 @@
 package com.TicketBooking.oops.entity;
 
 
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.Column;
+import org.springframework.data.relational.core.mapping.Table;
 
-@Entity
+import java.time.LocalDateTime;
+
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@Table(schema = "tickets")
+@Table("tickets")
 public class Tickets
 {
 
-    //primary and foreign key -->Id,
-    // total number of tickets
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id")
+    @Column("tid")
     private int tid;
 
     //private String name;
-    @Column(name="ticket_number")
+    @Column("ticket_number")
     private String ticketNumber;
 
-    @Column(name="mid")
+    @Column("mid")
     private int mid;
 
-    @Column(name="uid")
+    @Column("uid")
     private int uid;
+
+    // "C = Cancel and B= booked, SE = Seat Empty, cancelled Seats = CCT"
+    @Column("status")
+    private String status;
+
+    //new entities
+    @Column("price")
+    private int price;
+
+    @Column("bookingReference")
+    private String bookingReference;
+
+    @Column("createdAt")
+    private LocalDateTime createdAt;
 
 }

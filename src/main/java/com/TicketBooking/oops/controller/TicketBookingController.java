@@ -1,12 +1,18 @@
 package com.TicketBooking.oops.controller;
 
 import com.TicketBooking.oops.dto.BookTicketRequest;
+import com.TicketBooking.oops.dto.BookingResponse;
 import com.TicketBooking.oops.dto.TicketResponse;
 import com.TicketBooking.oops.entity.Tickets;
 import com.TicketBooking.oops.service.BookingService;
 import com.TicketBooking.oops.service.TicketService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
+import reactor.core.scheduler.Schedulers;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api")
@@ -21,16 +27,44 @@ public class TicketBookingController
         this.ticketService = ticketService;
     }
 
-    @GetMapping("/hello")
-    public String HelloControl()
-    {
-        return "Hello WOrld";
-    }
 
     @PostMapping("/book")
-    public Mono<Tickets> bookTicket(@RequestBody BookTicketRequest request)
+    public Mono<BookingResponse> bookTicket(@RequestBody BookTicketRequest request)
     {
         return bookingService.bookTicket(request);
+    }
+
+    @PostMapping("/multiple")
+    public Flux<BookingResponse> bookMultipleTickets(@RequestBody List<BookTicketRequest> requests)
+    {
+            return Flux.fromIterable(requests)
+                    .flatMap(request ->
+                                    bookingService.bookTicket(request)
+                                            .subscribeOn(Schedulers.boundedElastic()),
+                            10 // concurrency: 10 parallel calls
+                    );
+    }
+
+    @PostMapping("/multiple-pessimistic")
+    public Flux<BookingResponse> bookMultiplePessimistic(@RequestBody List<BookTicketRequest> requests)
+    {
+        return Flux.fromIterable(requests)
+                .flatMap(request ->
+                                bookingService.bookTicketPessimistic(request)
+                                        .onErrorResume(ex -> {
+                                            BookingResponse response = new BookingResponse();
+                                            response.setStatus_res("FAILED");
+                                            response.setMessage(ex.getMessage());
+                                            return Mono.just(response);
+                                        }),
+                        10
+                );
+    }
+
+
+    @PostMapping("/book-pessimistic")
+    public Mono<BookingResponse> bookTicketPessimistic(@RequestBody BookTicketRequest request) {
+        return bookingService.bookTicketPessimistic(request);
     }
 
     @GetMapping("/getticket/{bookingReference}")

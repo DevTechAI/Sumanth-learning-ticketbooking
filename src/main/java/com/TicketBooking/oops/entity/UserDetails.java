@@ -1,36 +1,35 @@
 package com.TicketBooking.oops.entity;
 
 
-import jakarta.annotation.Nonnull;
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.Column;
+import org.springframework.data.relational.core.mapping.Table;
 
-@Entity
+//@Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@Table(schema = "user_details")
+@Table( "user_details")
 public class UserDetails
 {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "uid")
+    @Column("uid")
     private int uid;
 
-    @Column(name = "user_name")
+    @Column( "user_name")
     private String userName;
 
-    @Nonnull
-    @Column(name = "pass_word")
+    @Column( "pass_word")
     private String PassWord;
 
-    @Column(name = "ticket_number")
+    @Column( "ticket_number")
     private String ticketNumber;
 
-    @Column(name = "email")
+    @Column( "email")
     private String email;
 
 }

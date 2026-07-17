@@ -9,14 +9,14 @@ import org.mapstruct.Mapping;
 @Mapper(componentModel = "spring")
 public interface BookingMapper
 {
-
     @Mapping(source = "ticket.tid", target = "ticketId")
     @Mapping(source = "ticket.bookingReference", target = "booking_Reference")
-    @Mapping(source = "ticket.status", target = "status_res")  //bookingResponse
-   // @Mapping(source = "payment.pid", target = "payid")
-   // @Mapping(source = "payment.transactionReference", target = "transaction_Reference")
-   // @Mapping(source = "payment.paymentStatus", target = "payment_Status")
-   // @Mapping(source = "payment.amount", target = "amount")
-   // @Mapping(target = "message", constant = "Ticket booked successfully")
+    @Mapping(source = "ticket.status", target = "status_res")
+    @Mapping(source = "payment.pid", target = "paymentId")
+    @Mapping(source = "payment.paymentStatus", target = "paymentStatus")
+    @Mapping(source = "payment.razorpayOrderId", target = "razorpayOrderId")
+    @Mapping(source = "payment.amount", target = "amount")
+    @Mapping(target = "razorpayKeyId", ignore = true)
+    @Mapping(target = "currency", ignore = true)
     BookingResponse toBookingResponse(Tickets ticket, Payment payment);
 }

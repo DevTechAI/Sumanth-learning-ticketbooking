@@ -1,0 +1,103 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ----------------------------< com.Demo:JWT >----------------------------
+[INFO] Building  0.0.1-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] >>> spring-boot:4.1.0:run (default-cli) > test-compile @ JWT >>>
+[INFO] 
+[INFO] --- resources:3.5.0:resources (default-resources) @ JWT ---
+[INFO] Copying 1 resource from src\main\resources to target\classes
+[INFO] Copying 0 resource from src\main\resources to target\classes
+[INFO] 
+[INFO] --- compiler:3.15.0:compile (default-compile) @ JWT ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 9 source files with javac [debug parameters release 17] to target\classes
+[INFO] 
+[INFO] --- resources:3.5.0:testResources (default-testResources) @ JWT ---
+[INFO] skip non existing resourceDirectory C:\Users\suman\Documents\GitHub\Sumanth-learning-ticketbooking\sumanth_handson\JWT\src\test\resources
+[INFO] 
+[INFO] --- compiler:3.15.0:testCompile (default-testCompile) @ JWT ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 1 source file with javac [debug parameters release 17] to target\test-classes
+[INFO] 
+[INFO] <<< spring-boot:4.1.0:run (default-cli) < test-compile @ JWT <<<
+[INFO] 
+[INFO] 
+[INFO] --- spring-boot:4.1.0:run (default-cli) @ JWT ---
+[INFO] Attaching agents: []
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v4.1.0)
+
+2026-07-17T22:06:31.125+05:30  INFO 18480 --- [JWT] [  restartedMain] com.Demo.JWT.JwtApplication              : Starting JwtApplication using Java 25.0.2 with PID 18480 (C:\Users\suman\Documents\GitHub\Sumanth-learning-ticketbooking\sumanth_handson\JWT\target\classes started by suman in C:\Users\suman\Documents\GitHub\Sumanth-learning-ticketbooking\sumanth_handson\JWT)
+2026-07-17T22:06:31.131+05:30  INFO 18480 --- [JWT] [  restartedMain] com.Demo.JWT.JwtApplication              : No active profile set, falling back to 1 default profile: "default"
+2026-07-17T22:06:31.210+05:30  INFO 18480 --- [JWT] [  restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2026-07-17T22:06:31.210+05:30  INFO 18480 --- [JWT] [  restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2026-07-17T22:06:32.576+05:30  INFO 18480 --- [JWT] [  restartedMain] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 8080 (http)
+2026-07-17T22:06:32.610+05:30  INFO 18480 --- [JWT] [  restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-07-17T22:06:32.611+05:30  INFO 18480 --- [JWT] [  restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.22]
+2026-07-17T22:06:32.663+05:30  INFO 18480 --- [JWT] [  restartedMain] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 1449 ms
+2026-07-17T22:06:32.770+05:30  INFO 18480 --- [JWT] [  restartedMain] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name customUserDetailsService
+2026-07-17T22:06:33.240+05:30  INFO 18480 --- [JWT] [  restartedMain] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 8080 (http) with context path '/'
+2026-07-17T22:06:33.245+05:30  INFO 18480 --- [JWT] [  restartedMain] com.Demo.JWT.JwtApplication              : Started JwtApplication in 2.665 seconds (process running for 3.249)
+2026-07-17T22:06:45.750+05:30  INFO 18480 --- [JWT] [nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-07-17T22:06:45.750+05:30  INFO 18480 --- [JWT] [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-07-17T22:06:45.752+05:30  INFO 18480 --- [JWT] [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2026-07-17T22:08:21.127+05:30  INFO 18480 --- [JWT] [   File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 2 class path changes (0 additions, 2 deletions, 0 modifications)
+2026-07-17T22:08:21.135+05:30  INFO 18480 --- [JWT] [       Thread-1] o.s.boot.tomcat.GracefulShutdown         : Commencing graceful shutdown. Waiting for active requests to complete
+2026-07-17T22:08:21.148+05:30  INFO 18480 --- [JWT] [tomcat-shutdown] o.s.boot.tomcat.GracefulShutdown         : Graceful shutdown complete
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v4.1.0)
+
+2026-07-17T22:08:21.402+05:30  INFO 18480 --- [JWT] [  restartedMain] com.Demo.JWT.JwtApplication              : Starting JwtApplication using Java 25.0.2 with PID 18480 (C:\Users\suman\Documents\GitHub\Sumanth-learning-ticketbooking\sumanth_handson\JWT\target\classes started by suman in C:\Users\suman\Documents\GitHub\Sumanth-learning-ticketbooking\sumanth_handson\JWT)
+2026-07-17T22:08:21.403+05:30  INFO 18480 --- [JWT] [  restartedMain] com.Demo.JWT.JwtApplication              : No active profile set, falling back to 1 default profile: "default"
+2026-07-17T22:08:22.067+05:30  INFO 18480 --- [JWT] [  restartedMain] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 8080 (http)
+2026-07-17T22:08:22.073+05:30  INFO 18480 --- [JWT] [  restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-07-17T22:08:22.073+05:30  INFO 18480 --- [JWT] [  restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.22]
+2026-07-17T22:08:22.134+05:30  INFO 18480 --- [JWT] [  restartedMain] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 719 ms
+2026-07-17T22:08:22.197+05:30  INFO 18480 --- [JWT] [  restartedMain] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name customUserDetailsService
+2026-07-17T22:08:22.403+05:30  INFO 18480 --- [JWT] [  restartedMain] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 8080 (http) with context path '/'
+2026-07-17T22:08:22.406+05:30  INFO 18480 --- [JWT] [  restartedMain] com.Demo.JWT.JwtApplication              : Started JwtApplication in 1.101 seconds (process running for 112.41)
+2026-07-17T22:08:22.410+05:30  INFO 18480 --- [JWT] [  restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2026-07-17T22:08:23.786+05:30  INFO 18480 --- [JWT] [   File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 2 class path changes (2 additions, 0 deletions, 0 modifications)
+2026-07-17T22:08:23.787+05:30  INFO 18480 --- [JWT] [       Thread-5] o.s.boot.tomcat.GracefulShutdown         : Commencing graceful shutdown. Waiting for active requests to complete
+2026-07-17T22:08:23.792+05:30  INFO 18480 --- [JWT] [tomcat-shutdown] o.s.boot.tomcat.GracefulShutdown         : Graceful shutdown complete
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v4.1.0)
+
+2026-07-17T22:08:23.885+05:30  INFO 18480 --- [JWT] [  restartedMain] com.Demo.JWT.JwtApplication              : Starting JwtApplication using Java 25.0.2 with PID 18480 (C:\Users\suman\Documents\GitHub\Sumanth-learning-ticketbooking\sumanth_handson\JWT\target\classes started by suman in C:\Users\suman\Documents\GitHub\Sumanth-learning-ticketbooking\sumanth_handson\JWT)
+2026-07-17T22:08:23.887+05:30  INFO 18480 --- [JWT] [  restartedMain] com.Demo.JWT.JwtApplication              : No active profile set, falling back to 1 default profile: "default"
+2026-07-17T22:08:24.173+05:30  INFO 18480 --- [JWT] [  restartedMain] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 8080 (http)
+2026-07-17T22:08:24.174+05:30  INFO 18480 --- [JWT] [  restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-07-17T22:08:24.174+05:30  INFO 18480 --- [JWT] [  restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.22]
+2026-07-17T22:08:24.202+05:30  INFO 18480 --- [JWT] [  restartedMain] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 314 ms
+2026-07-17T22:08:24.223+05:30  INFO 18480 --- [JWT] [  restartedMain] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name customUserDetailsService
+2026-07-17T22:08:24.311+05:30  INFO 18480 --- [JWT] [  restartedMain] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 8080 (http) with context path '/'
+2026-07-17T22:08:24.314+05:30  INFO 18480 --- [JWT] [  restartedMain] com.Demo.JWT.JwtApplication              : Started JwtApplication in 0.461 seconds (process running for 114.317)
+2026-07-17T22:08:24.315+05:30  INFO 18480 --- [JWT] [  restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2026-07-17T22:08:26.902+05:30  INFO 18480 --- [JWT] [nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-07-17T22:08:26.904+05:30  INFO 18480 --- [JWT] [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-07-17T22:08:26.905+05:30  INFO 18480 --- [JWT] [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2026-07-17T22:08:26.915+05:30  WARN 18480 --- [JWT] [nio-8080-exec-1] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.http.converter.HttpMessageNotReadableException: JSON parse error: Unexpected character ('u' (code 117)): was expecting double-quote to start property name]
