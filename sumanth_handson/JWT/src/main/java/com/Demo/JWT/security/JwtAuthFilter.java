@@ -2,6 +2,7 @@ package com.Demo.JWT.security;
 
 import com.Demo.JWT.Service.CustomUserDetailsService;
 
+import io.jsonwebtoken.JwtException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -41,7 +42,15 @@ public class JwtAuthFilter extends OncePerRequestFilter {
         }
 
         String token = authHeader.substring(7);
-        String username = jwtService.extractUsername(token);
+        String username;
+        try {
+            username = jwtService.extractUsername(token);
+        } catch (JwtException | IllegalArgumentException ex) {
+            SecurityContextHolder.clearContext();
+            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+            response.getWriter().write("Invalid or expired JWT token");
+            return;
+        }
 
         if (username != null &&
                 SecurityContextHolder.getContext().getAuthentication() == null) {

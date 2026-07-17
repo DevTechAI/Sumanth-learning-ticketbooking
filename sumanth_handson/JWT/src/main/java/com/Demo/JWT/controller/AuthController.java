@@ -1,8 +1,6 @@
 package com.Demo.JWT.controller;
 
 import com.Demo.JWT.DTO.LoginRequest;
-
-import com.Demo.JWT.DTO.LoginRequest;
 import com.Demo.JWT.DTO.LoginResponse;
 import com.Demo.JWT.security.JWTService;
 
