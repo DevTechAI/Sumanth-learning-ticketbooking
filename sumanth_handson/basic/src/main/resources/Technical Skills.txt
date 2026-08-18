@@ -1,0 +1,5 @@
+Languages & Frameworks: Java(17/21), Groovy, J2EE, Spring Boot 2.7/3/3.2, Spring MVC(Request/Response processing, http methods, Exception Handling), Bean Validation, Spring REST, Spring Dependency Management
+Cloud & DevOps: Kubernetes, Docker, 
+Version Control & CI/CD Tools: CI/CD Integration, BitBucket, 
+System Design Tools: Swagger/OpenAPI
+Methodologies & Architectures: Microservices Patterns, RESTful API
