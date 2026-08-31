@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spring Mail App</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f6f8;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background: white;
+            width: 440px;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.12);
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            margin-bottom: 6px;
+        }
+
+        input {
+            width: 100%;
+            padding: 11px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+        }
+
+        button {
+            width: 100%;
+            margin-top: 22px;
+            padding: 12px;
+            background: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background: #1d4ed8;
+        }
+
+        #result {
+            margin-top: 15px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h2>Send Email</h2>
+
+    <label>To Emails</label>
+    <input
+            type="text"
+            id="toEmails"
+            placeholder="abc@gmail.com, xyz@gmail.com">
+
+    <label>From Email</label>
+    <input
+            type="email"
+            id="fromEmail"
+            placeholder="your verified Brevo email">
+
+    <label>BCC Email</label>
+    <input
+            type="email"
+            id="bccEmail"
+            placeholder="Optional">
+
+    <label>Message</label>
+    <textarea id="message" rows="6" placeholder="Enter your message"></textarea>
+
+    <button onclick="sendEmail()">Send Email</button>
+
+    <div id="result"></div>
+
+</div>
+
+<script>
+
+    async function sendEmail() {
+
+        const toEmailsInput =
+            document.getElementById("toEmails").value;
+
+        const fromEmail =
+            document.getElementById("fromEmail").value;
+
+        const bccEmail =
+            document.getElementById("bccEmail").value;
+
+        const toEmails = toEmailsInput
+            .split(",")
+            .map(email => email.trim())
+            .filter(email => email.length > 0);
+
+        const message = document.getElementById("message").value;
+
+        const emailData = {
+            toEmails: toEmails,
+            fromEmail: fromEmail,
+            bccEmail: bccEmail,
+            message: message
+        };
+
+        const result =
+            document.getElementById("result");
+
+        result.innerText = "Sending...";
+
+        try {
+
+            const response = await fetch("/api/emails/send", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(emailData)
+            });
+
+            const responseText =
+                await response.text();
+
+            if (response.ok) {
+                result.innerText =
+                    "Emails sent successfully!";
+            } else {
+                result.innerText =
+                    "Failed: " + responseText;
+            }
+
+        } catch (error) {
+
+            result.innerText =
+                "Error sending emails.";
+
+            console.error(error);
+        }
+    }
+
+</script>
+
+</body>
+</html>
